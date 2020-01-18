@@ -14,17 +14,31 @@
                             <th scope="col">DIRECCION</th>
                             <th scope="col">TELEFONO</th>
                             <th scope="col">CORREO</th>
+                            <th scope="col" colspan="2">ACCIONES</th>
                           </tr>
                         </thead>
                         <tbody>
-                        @foreach ($alumnos as $alumno) 
+                        @foreach ($proveedores as $proveedor) 
                           <tr class="border">
                             <th scope="row">{{$loop->iteration}}</th>
-                            <td>{{$alumno->nombre}}</td>
+                            <td>{{$proveedor->nombre}}</td>
+                            <td>{{$proveedor->direccion}}</td>
+                            <td>{{$proveedor->telefono}}</td>
+                            <td>{{$proveedor->correo}}</td>
+                            <td>
+                                <a class="btn btn-info" href="{{route('proveedores.edit', $proveedor->id)}}">Editar</a>
+                            </td>
+                            <td>
+                                <form action="{{route('proveedores.destroy', $proveedor->id)}}" method="POST">
+                                        {!! method_field('DELETE') !!}
+                                        @csrf
+                                    <button type="submit" href="" class="btn btn-danger">Eliminar</button>
+                                </form>
+                            </td>
                           </tr>
                           @endforeach
                         </tbody>
-                      </table>
+                    </table>
                 </div>
             </section>
         </article>

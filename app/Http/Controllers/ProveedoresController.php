@@ -64,9 +64,9 @@ class ProveedoresController extends Controller
      * @param  \App\Proveedores  $proveedores
      * @return \Illuminate\Http\Response
      */
-    public function edit(Proveedores $proveedor)
+    public function edit($id)
     {
-
+        $proveedor = Proveedores::findOrFail($id);
         return view('proveedores.edit', compact('proveedor'));
     }
 
@@ -77,8 +77,9 @@ class ProveedoresController extends Controller
      * @param  \App\Proveedores  $proveedores
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Proveedores $proveedor)
+    public function update(Request $request, $id)
     {
+        $proveedor = Proveedores::findOrFail($id);
         $proveedor->nombre = $request->nombre;
         $proveedor->direccion = $request->direccion;
         $proveedor->telefono = $request->telefono;
@@ -94,8 +95,9 @@ class ProveedoresController extends Controller
      * @param  \App\Proveedores  $proveedores
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Proveedores $proveedor)
+    public function destroy($id)
     {
+        $proveedor = Proveedores::findOrFail($id);
         $proveedor->delete();   
 
         return redirect()->route('proveedores.index');
