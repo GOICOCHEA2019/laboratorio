@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Categoria;
 use App\Producto;
 use App\systemPackageModels\proveedores\Proveedor;
+use App\Unidad;
 use Illuminate\Http\Request;
 
 class ProductosController extends Controller
@@ -16,16 +17,20 @@ class ProductosController extends Controller
      */
     public function index()
     {
-
+        $productos= Producto::get();
+        $unidades= Unidad::get();
+        $categorias=Categoria::get();
+        $categorias=Proveedor::get();
         if(!empty(request()->buscar)){
             $productos=Producto::where('nombre','like','%'.request()->buscar.'%')
             ->orderBy(request('sort','id'),'ASC')
             ->paginate(10);
-            return view('productos.index', compact('productos'));
+            return view('producto.index',compact('productos','categorias','unidades','proveedores'));
         }else{
             $productos = Producto::orderBy(request('sort','id'),'ASC')
             ->paginate(10);
-            return view('productos.index', compact('productos'));
+           
+            return view('producto.index',compact('productos','categorias','unidades','proveedores'));
         }
        
     }
@@ -41,7 +46,7 @@ class ProductosController extends Controller
         $unidades= Unidad::get();
         $categorias=Categoria::get();
         $categorias=Proveedor::get();
-        return view('systemPackageViews\producto.create',compact('productos','categorias','unidades','proveedores'));
+        return view('producto.create',compact('productos','categorias','unidades','proveedores'));
  
     }
 
