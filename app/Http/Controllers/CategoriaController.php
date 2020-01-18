@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Categoria;
+
 use Illuminate\Http\Request;
 
 
@@ -15,7 +16,7 @@ class CategoriaController extends Controller
      */
     public function index()
     {
-        $categoria = categoria::get();
+        $categoria = Categoria::get();
         return view('categoria.index', compact('categoria'));
     }
 
@@ -94,8 +95,11 @@ class CategoriaController extends Controller
      * @param  \App\Categoria  $categoria
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Categoria $categoria)
+    public function destroy($id)
     {
-        //
+        $categoria = categoria::findOrFail($id);
+        $categoria->delete();   
+
+        return redirect()->route('categoria.index');
     }
 }

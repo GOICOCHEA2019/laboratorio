@@ -53,7 +53,7 @@
                                 <a class="nav-link" href="{{route('proveedores.index')}}">Proveedores</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{route('categorias.index')}}">Categorias</a>
+                                <a class="nav-link" href="{{route('categoria.index')}}">Categorias</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{route('unidades.index')}}">Unidades</a>
