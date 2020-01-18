@@ -64,7 +64,8 @@ class UnidadesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $unidad = Unidad::findOrFail($id);
+        return view('unidades.edit',compact('unidad'));
     }
 
     /**
@@ -76,7 +77,12 @@ class UnidadesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+         $unidad = Unidad::findOrFail($id);
+
+         $unidad->nombre = $request->nombre;
+        $unidad->save();
+
+        return redirect()->route('unidades.index');
     }
 
     /**
@@ -87,6 +93,9 @@ class UnidadesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $unidad = Unidad::findOrFail($id);
+        $unidad->delete();
+        
+        return redirect()->route('unidades.index');
     }
 }

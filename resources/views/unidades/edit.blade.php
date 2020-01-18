@@ -2,8 +2,8 @@
 @section('content')
 
 
-	<form action="{{route('unidades.store')}}" method="post" >
-asdasdasd
+	<form action="{{route('unidades.update',$unidad->id)}}" method="post" >
+
 		<div class="form-group">
 			<label for="nombre">NOMBRE</label>
 			<input class="form-control" type="text" name="nombre" value="{{$unidad->nombre }}" id="nombre">
