@@ -26,7 +26,7 @@ class ProveedoresController extends Controller
      */
     public function create()
     {
-        //
+        return view('proveedores.create');
     }
 
     /**
@@ -37,7 +37,14 @@ class ProveedoresController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $proveedor = new Proveedores;
+        $proveedor->nombre = $request->nombre;
+        $proveedor->direccion = $request->direccion;
+        $proveedor->telefono = $request->telefono;
+        $proveedor->correo = $request->correo;
+        $proveedor->save();
+
+        return redirect()->route('proveedores.index');
     }
 
     /**
@@ -57,9 +64,10 @@ class ProveedoresController extends Controller
      * @param  \App\Proveedores  $proveedores
      * @return \Illuminate\Http\Response
      */
-    public function edit(Proveedores $proveedores)
+    public function edit(Proveedores $proveedor)
     {
-        //
+
+        return view('proveedores.edit', compact('proveedor'));
     }
 
     /**
@@ -69,9 +77,15 @@ class ProveedoresController extends Controller
      * @param  \App\Proveedores  $proveedores
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Proveedores $proveedores)
+    public function update(Request $request, Proveedores $proveedor)
     {
-        //
+        $proveedor->nombre = $request->nombre;
+        $proveedor->direccion = $request->direccion;
+        $proveedor->telefono = $request->telefono;
+        $proveedor->correo = $request->correo;
+        $proveedor->save();
+
+        return redirect()->route('proveedores.index');
     }
 
     /**
@@ -80,8 +94,10 @@ class ProveedoresController extends Controller
      * @param  \App\Proveedores  $proveedores
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Proveedores $proveedores)
+    public function destroy(Proveedores $proveedor)
     {
-        //
+        $proveedor->delete();   
+
+        return redirect()->route('proveedores.index');
     }
 }
