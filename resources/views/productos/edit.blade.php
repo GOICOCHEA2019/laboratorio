@@ -3,17 +3,8 @@
 
     <div class="row">
         <div class="col-12">
-            <h4>Registro de productos</h4>
+            <h4>    Editar  productos</h4>
         </div>  
-        {{-- @if(session()->has('info'))
-        <div class="row">
-            <div class="col">
-                <div class="alert alert-success" role="alert">
-                    {{session('info')}}
-                </div>
-            </div>
-        </div>
-    @endif --}}
 
     </div>
     <div class="row ">

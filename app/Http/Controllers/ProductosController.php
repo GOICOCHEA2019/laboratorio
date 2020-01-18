@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Categoria;
 use App\Producto;
-use App\systemPackageModels\proveedores\Proveedor;
+use App\Proveedores as proveedor;
 use App\Unidad;
 use Illuminate\Http\Request;
 
@@ -20,17 +20,17 @@ class ProductosController extends Controller
         $productos= Producto::get();
         $unidades= Unidad::get();
         $categorias=Categoria::get();
-        $categorias=Proveedor::get();
+        $proveedores=Proveedor::get();
         if(!empty(request()->buscar)){
             $productos=Producto::where('nombre','like','%'.request()->buscar.'%')
             ->orderBy(request('sort','id'),'ASC')
             ->paginate(10);
-            return view('producto.index',compact('productos','categorias','unidades','proveedores'));
+            return view('productos.index',compact('productos','categorias','unidades','proveedores'));
         }else{
             $productos = Producto::orderBy(request('sort','id'),'ASC')
             ->paginate(10);
            
-            return view('producto.index',compact('productos','categorias','unidades','proveedores'));
+            return view('productos.index',compact('productos','categorias','unidades','proveedores'));
         }
        
     }
@@ -45,8 +45,8 @@ class ProductosController extends Controller
         $productos= Producto::get();
         $unidades= Unidad::get();
         $categorias=Categoria::get();
-        $categorias=Proveedor::get();
-        return view('producto.create',compact('productos','categorias','unidades','proveedores'));
+        $proveedores=Proveedor::get();
+        return view('productos.create',compact('productos','categorias','unidades','proveedores'));
  
     }
 
