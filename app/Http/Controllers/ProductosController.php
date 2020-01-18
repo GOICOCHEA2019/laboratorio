@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Categoria;
 use App\Producto;
+use App\systemPackageModels\proveedores\Proveedor;
 use Illuminate\Http\Request;
 
 class ProductosController extends Controller
@@ -14,8 +16,18 @@ class ProductosController extends Controller
      */
     public function index()
     {
-        $productos = Producto::get();
-        return view('productos.index', compact('productos'));
+
+        if(!empty(request()->buscar)){
+            $productos=Producto::where('nombre','like','%'.request()->buscar.'%')
+            ->orderBy(request('sort','id'),'ASC')
+            ->paginate(10);
+            return view('productos.index', compact('productos'));
+        }else{
+            $productos = Producto::orderBy(request('sort','id'),'ASC')
+            ->paginate(10);
+            return view('productos.index', compact('productos'));
+        }
+       
     }
 
     /**
@@ -25,7 +37,12 @@ class ProductosController extends Controller
      */
     public function create()
     {
-        //
+        $productos= Producto::get();
+        $unidades= Unidad::get();
+        $categorias=Categoria::get();
+        $categorias=Proveedor::get();
+        return view('systemPackageViews\producto.create',compact('productos','categorias','unidades','proveedores'));
+ 
     }
 
     /**
@@ -36,7 +53,15 @@ class ProductosController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $productos= new Producto();
+        $productos->nombre=$request->nombre;
+        $productos->categoria_id=$request->categoria_id;
+        $productos->unidad_id=$request->unidad_id;
+        $productos->proveedor_id=$request->proveedor_id;
+ 
+        $productos->save();
+
+        return redirect()->route('productos.index')->with('info','Registro guardado correctamente.');
     }
 
     /**
@@ -58,7 +83,13 @@ class ProductosController extends Controller
      */
     public function edit($id)
     {
-        //
+        $productos= Producto::get($id);
+        $unidades= Unidad::get();
+        $categorias=Categoria::get();
+        $categorias=Proveedor::get();
+
+        return view('producto.edit',compact('productos','categorias','unidades','proveedores'));
+ 
     }
 
     /**
@@ -70,7 +101,18 @@ class ProductosController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $productos=Producto::findOrFail($id);
+    
+        $productos= new Producto();
+        $productos->nombre=$request->nombre;
+        $productos->categoria_id=$request->categoria_id;
+        $productos->unidad_id=$request->unidad_id;
+        $productos->proveedor_id=$request->proveedor_id;
+ 
+        $productos->save();
+
+        return redirect()->route("productos.index")->with("info", "Datos actualizados correctamente");
+    
     }
 
     /**
