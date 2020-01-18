@@ -12,7 +12,7 @@
             </div>
             <div class="row">
 
-                <div class="col-md-12 col-sm-12 p-2">
+                <div class="col">
                     <div class="row py-1 pr-1" >
                         <div class="col-xs-12 col-sm-12">
                             <form action="" id="form-buscar-productos" action="">
@@ -50,7 +50,7 @@
                                 <tr>
                                    <td class="text-right">{{$producto->id}}</td>
                                     <td>{{$producto->nombre}}</td>
-                                    <td>{{$categorias->nombre}}</td>
+                                    <td>{{$producto->categoria_id}}</td>
                                     <td>{{$producto->unidad_id}}</td>
                                     <td>{{$producto->proveedor_id}}</td>
                                    
