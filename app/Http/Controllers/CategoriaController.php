@@ -64,9 +64,10 @@ class CategoriaController extends Controller
      * @param  \App\Categoria  $categoria
      * @return \Illuminate\Http\Response
      */
-    public function edit(Categoria $categoria)
+    public function edit( $id)
     {
-        //
+        $categoria = categoria::findOrFail($id);
+        return view('categoria.edit', compact('categoria'));
     }
 
     /**
@@ -76,9 +77,15 @@ class CategoriaController extends Controller
      * @param  \App\Categoria  $categoria
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Categoria $categoria)
+    public function update(Request $request,  $id)
     {
-        //
+        $categoria = categoria::findOrFail($id);
+
+        $categoria->nombre = $request->nombre;
+       
+         $categoria->save();
+
+        return redirect()->route('categoria.index');
     }
 
     /**
