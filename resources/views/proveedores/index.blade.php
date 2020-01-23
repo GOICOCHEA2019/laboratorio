@@ -14,7 +14,7 @@
                             <th scope="col">DIRECCION</th>
                             <th scope="col">TELEFONO</th>
                             <th scope="col">CORREO</th>
-                            <th scope="col" colspan="2">ACCIONES</th>
+                            <th scope="col" colspan="3">ACCIONES</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -27,6 +27,13 @@
                             <td>{{$proveedor->correo}}</td>
                             <td>
                                 <a class="btn btn-info" href="{{route('proveedores.edit', $proveedor->id)}}">Editar</a>
+                            </td>
+
+                            <td>
+                                @if (isset($proveedor) && $proveedor->dniEscaneado != null)
+                            <a href="{{route("descargar.archivos")."?rutaarchivo=".$proveedor->dniEscaneado}}" class="text-danger" target="_blank">Descargar</a>
+
+                                @endif
                             </td>
                             <td>
                                 <form action="{{route('proveedores.destroy', $proveedor->id)}}" method="POST">

@@ -23,3 +23,4 @@ Route::resource('categoria', 'CategoriaController');
 Route::resource('productos', 'ProductosController');
 Route::resource('unidades', 'UnidadesController');
 Route::resource('proveedores', 'ProveedoresController');
+Route::get('descargararchivos', 'DescargararchivoController@descargararchivos')->name('descargar.archivos');

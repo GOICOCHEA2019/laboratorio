@@ -3,7 +3,7 @@
 
 @section('content')
 
-    <form action="{{route('proveedores.update', $proveedor->id)}}" method="POST">
+    <form action="{{route('proveedores.update', $proveedor->id)}}" method="POST" enctype="multipart/form-data">
         <div class="form-group">
             <label for="nombre">Nombre</label>
             <input class="form-control" type="text" name="nombre" id="nombre" placeholder="Nombre" value="{{$proveedor->nombre}}">

@@ -3,7 +3,7 @@
 
 @section('content')
 
-    <form action="{{route('proveedores.store')}}" method="POST">
+    <form action="{{route('proveedores.store')}}" method="POST" enctype="multipart/form-data">
         <div class="form-group">
             <label for="nombre">Nombre</label>
             <input class="form-control" type="text" name="nombre" id="nombre" placeholder="Nombre" value="{{old('nombre')}}">
@@ -23,6 +23,12 @@
             <label for="correo">Correo</label>
             <input class="form-control" type="email" name="correo" id="correo" placeholder="Correo" value="{{old('correo')}}">
             <span class="text-danger">{{$errors->first('correo')}}</span>
+        </div>
+
+        <div class="form-group">
+            <label for="dniEscaneado">subir DNI</label>
+            <input type="file" name="dniEscaneado" class="form-control">
+            <span class="text-danger">{{$errors->first('dniEscaneado')}}</span>
         </div>
 
         @csrf 

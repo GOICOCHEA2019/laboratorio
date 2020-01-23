@@ -1,9 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Http\Requests\proveedorCreateRequest;
 use App\Proveedores;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
+
+
 
 class ProveedoresController extends Controller
 {
@@ -35,13 +39,31 @@ class ProveedoresController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(proveedorCreateRequest $request)
+
     {
+
+
         $proveedor = new Proveedores;
         $proveedor->nombre = $request->nombre;
         $proveedor->direccion = $request->direccion;
         $proveedor->telefono = $request->telefono;
         $proveedor->correo = $request->correo;
+
+        if($request->hasFile("dniEscaneado")){
+            $archivo = $request->file('dniEscaneado');
+            $extension = $archivo->getClientOriginalExtension();
+            $nuevoNombre = strtolower(time().".".$extension);
+
+            $proveedor->dniescaneado = Storage::putFileAs("public/proveedores/",
+            $archivo, $nuevoNombre);
+
+        }
+        else{
+            Log::info('no has enviado un archivo');
+        }
+        
+
         $proveedor->save();
 
         return redirect()->route('proveedores.index');
